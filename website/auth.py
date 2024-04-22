@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 '''
 Contains functionalities for authorization pages (login, signup, logout).
 '''
@@ -12,7 +12,7 @@ def login():
 
     Returns: The login page.
     '''
-    return "<h1>Login</h1>"
+    return render_template("login.html")
 
 @auth.route('/logout')
 def logout():
@@ -30,5 +30,5 @@ def sign_up():
     
     Returns: The sign up page.
     '''
-    return "<h1>Sign Up</h1>"
+    return render_template("sign_up.html")
 

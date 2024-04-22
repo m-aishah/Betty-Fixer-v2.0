@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 '''Contains views definitions for the website.'''
 
 views = Blueprint('views', __name__)
@@ -10,4 +10,4 @@ def home():
     
     Returns: the homepage.
     '''
-    return "<h1>Homepage</h1>"
+    return render_template("home.html")
