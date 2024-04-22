@@ -1,4 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
+from . import db
+from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
 '''
 Contains functionalities for authorization pages (login, signup, logout).
 '''
@@ -18,14 +21,23 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        print(email, password)
+        # print(email, password)
+        user = User.query.filter_by(email=email).first()
         # Check user exists in database.
+        if user:
         # Check password is correct.
-        # redirect to homepage.
-        return redirect(url_for('views.home'))
-        # Login user.
-        # If password is not correct, flash error
-        # If user does not exist flash error.
+            if check_password_hash(user.password, password):
+                flash('Logged in successfully!', category='success')
+                # Login user.
+                # redirect to homepage.
+                return redirect(url_for('views.home'))
+            else:
+                # If password is not correct, flash error
+                flash('Incorrect Password: Please try again.', category='error')
+        else:
+            # If user does not exist flash error.
+            flash('Invalid User: Please enter valid login details.', category='error')    
+        
     return render_template("login.html")
 
 @auth.route('/logout')
@@ -35,7 +47,8 @@ def logout():
     
     Returns: the logout page.
     '''
-    return "<h1>Logout</h1>"
+    # Logout user
+    return redirect(url_for('auth.login'))
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -49,7 +62,10 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        if len(email) < 4:
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('This account already exists. Login or use a different email', category='error')
+        elif len(email) < 4:
             flash('Email is too short. Please enter a valid email', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters', category='error')
@@ -57,7 +73,10 @@ def sign_up():
             flash('Passwords do not match', category='error')  
         else:
             # Create new user
+            new_user = User(email=email, password=generate_password_hash(password1))
             # Add new user to the database
+            db.session.add(new_user)
+            db.session.commit()
             # LOgin user
             # Print/Flash success message.
             flash('Account created', category='success')
