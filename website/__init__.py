@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 from os import path
 '''Init website module.'''
 
@@ -15,7 +16,7 @@ def create_app():
     '''
     app = Flask(__name__)
     # Initialize application's secret key.
-    app.config['SECRET_KEY'] = 'This is my secret key.'
+    app.config['SECRET_KEY'] = os.environ.get("BETTY_FIXER_SECRET", None)
     # COnfigure database.
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
