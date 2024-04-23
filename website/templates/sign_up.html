@@ -94,14 +94,24 @@
       <div class="text-center mb-4">
         <button
           type="submit"
-          class="btn btn-primary btn-block"
+          class="btn btn-primary btn-block custom-btn"
           style="
             font-family: Arial, sans-serif;
             font-size: large;
             background-color: #2db5d1;
             border-color: #2db5d1;
-            width: 100%;
+            border-radius: 25px;
+            width: 70%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease,
+              width 0.3s ease;
           "
+          onmouseover="this.style.backgroundColor='#37c3e8'; this.style.transform='scale(1.05)'; this.style.width='75%'"
+          onmouseout="this.style.backgroundColor='#2db5d1'; this.style.transform='scale(1)'; this.style.width='70%'"
         >
           Sign Up
         </button>
