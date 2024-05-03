@@ -12,6 +12,7 @@ from .models import User
 google_auth = Blueprint('google_auth', __name__)
 
 # Configuration for Sign up with Google Button
+# Need to get google client id and google client secret.
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET")
 GOOGLE_DISCOVERY_URL = (

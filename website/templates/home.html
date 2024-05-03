@@ -1,3 +1,17 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is the homepage</h1>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betty Fixer</title>
+</head>
+<body>
+    <h1>Please Input your "C" Code</h1>
+    <form action="/submit" method="post">
+        <!-- Use a <textarea> element for multi-line input -->
+            <textarea name="text" rows="30" cols="120">{{ text }}</textarea>
+            <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
