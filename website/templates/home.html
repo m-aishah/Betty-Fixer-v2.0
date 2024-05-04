@@ -1,17 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Betty Fixer</title>
-</head>
-<body>
-    <h1>Please Input your "C" Code</h1>
-    <form action="/submit" method="post">
-        <!-- Use a <textarea> element for multi-line input -->
-            <textarea name="text" rows="30" cols="120">{{ text }}</textarea>
-            <br>
-        <input type="submit" value="Submit">
+{% extends "base.html" %}
+{% block content %}
+<!--Set up background, align content to center.-->
+<div
+  class="bg-image"
+  style="
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <!--Set up card.-->
+  <div
+    class="card p-5"
+    style="
+      max-width: 500px;
+      width: 90%;
+      font-family: Arial, sans-serif;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+      margin: 25px;
+    "
+  >
+    <!--Heading-->
+    <h2
+      class="text-center mb-2"
+      style="font-size: 28px; font-weight: bold; margin-bottom: 15px"
+    >
+      Enter your C Code
+    </h2>
+    <!--Tag phrase-->
+    <p class="text-center mb-4" style="color: #757575; font-size: 16px">
+      Let's fix it ; )
+    </p>
+    
+    <!--Form-->
+    <form action="/submit" method="POST">
+      
+      <!--Textarea for entering text-->
+      <div class="form-group mb-4">
+        <textarea
+          class="form-control auto-resize"
+          id="text"
+          name="text"
+          rows="5"
+          placeholder="Enter your C code here"
+          style="resize: none;"
+        >{{ text }}</textarea>
+      </div>
+      
+      <!--Fix it button.-->
+      <div class="text-center mb-4">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block custom-btn"
+          style="
+            font-family: Arial, sans-serif;
+            font-size: large;
+            background-color: #2db5d1;
+            border-color: #2db5d1;
+            border-radius: 25px;
+            width: 70%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease,
+              width 0.3s ease;
+          "
+          onmouseover="this.style.backgroundColor='#37c3e8'; this.style.transform='scale(1.05)'; this.style.width='75%'"
+          onmouseout="this.style.backgroundColor='#2db5d1'; this.style.transform='scale(1)'; this.style.width='70%'"
+        >
+          Fix it ->
+        </button>
+      </div>
     </form>
-</body>
-</html>
+  </div>
+</div>
+
+<script>
+  // Auto resize textarea
+  const textarea = document.querySelector('.auto-resize');
+  textarea.addEventListener('input', () => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  });
+</script>
+
+{% endblock %}

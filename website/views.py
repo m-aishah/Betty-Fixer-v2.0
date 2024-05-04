@@ -14,7 +14,16 @@ def home():
     
     Returns: the homepage.
     '''
-    return render_template("home.html", user=current_user)
+    return render_template('home.html' ,user=current_user)
+
+@views.route('/dummy_user')
+def dummy_user_home():
+    '''
+    Defines the homepage functionality for users without an account.
+    
+    Returns: the homepage.
+    '''
+    return render_template('home.html' ,user=None)
 
 @views.route('/submit', methods=['POST'])
 def submit():
@@ -36,6 +45,6 @@ def submit():
             formatted_code = formatted_file.read()
         
         # Render a template with the formatted code
-        return render_template('formatted.html', formatted_code=formatted_code)
+        return render_template('formatted.html', formatted_code=formatted_code, user= current_user)
 if __name__ == '__main__':
     app.run(debug=True)

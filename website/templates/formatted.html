@@ -1,12 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formatted Code</title>
-</head>
-<body>
-    <h1>Formatted Code</h1>
-    <pre>{{ formatted_code }}</pre>
-</body>
-</html>
+{% extends "base.html" %} 
+{% block content %}
+<!--Set up background, align content to center.-->
+<div
+  class="bg-image"
+  style="
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <!--Set up card.-->
+  <div
+    class="card p-5"
+    style="
+      max-width: 500px;
+      width: 90%;
+      font-family: Arial, sans-serif;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+      margin: 25px;
+    "
+  >
+    <!--Tag phrase-->
+    <p class="text-center mb-4" style="color: #757575; font-size: 16px">
+      Here is your clean code
+    </p>
+    
+    <!--Formatted code box with copy button-->
+    <div class="positive-relation mb-4">
+        <button class="btn btn-sm btn-outline-secondary copy-button" onclick="copyFormattedCode()">Copy</button>
+        <pre class="formatted-code">{{ formatted_code }}</pre></div>
+    </div>
+      
+    <!--Back button.-->
+    <form method="POST">
+        <div class="text-center">
+        <a
+          href="/"
+          class="btn btn-primary btn-block custom-btn"
+          style="
+            font-family: Arial, sans-serif;
+            font-size: large;
+            background-color: #2db5d1;
+            border-color: #2db5d1;
+            border-radius: 25px;
+            width: 100%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: block; /* Make the button a block element */
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease,
+              width 0.3s ease;
+          "
+           onmouseover="this.style.backgroundColor='#37c3e8'; this.style.transform='scale(1.05)';"
+           onmouseout="this.style.backgroundColor='#2db5d1'; this.style.transform='scale(1)';"
+        >
+          Back
+        </a>
+      </div>
+    </form>
+   
+  </div>
+</div>
+
+<script>
+    function copyFormattedCode() {
+        const code = document.querySelector('.formatted-code');
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+        alert('Code copied!');
+    }
+</script>
+{% endblock %}
