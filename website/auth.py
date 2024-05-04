@@ -62,6 +62,7 @@ def sign_up():
     Returns: The sign up page.
     '''
     if request.method == 'POST':
+        first_name = request.form.get('first_name')
         email = request.form.get('email')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
@@ -77,7 +78,7 @@ def sign_up():
             flash('Passwords do not match', category='error')  
         else:
             # Create new user
-            new_user = User(email=email, password=generate_password_hash(password1))
+            new_user = User(first_name=first_name, email=email, password=generate_password_hash(password1))
             # Add new user to the database
             db.session.add(new_user)
             db.session.commit()
@@ -89,4 +90,3 @@ def sign_up():
             return redirect(url_for('views.home'))
         
     return render_template("sign_up.html", user=current_user)
-

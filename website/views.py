@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
+from .models import codeHistory
 import subprocess
 import glob
 '''Contains views definitions for the website.'''
@@ -15,6 +16,19 @@ def home():
     Returns: the homepage.
     '''
     return render_template('home.html' ,user=current_user)
+
+@views.route('/fix_code')
+@login_required
+def fix_code():
+    '''
+    Defines the homepage functionality.
+    
+    Returns: the homepage.
+    '''
+    code_id = request.args.get('code_id')
+    code = codeHistory.query.get(code_id)
+    return render_template('fix_code.html' ,user=current_user)
+
 
 @views.route('/dummy_user')
 def dummy_user_home():
@@ -46,5 +60,3 @@ def submit():
         
         # Render a template with the formatted code
         return render_template('formatted.html', formatted_code=formatted_code, user= current_user)
-if __name__ == '__main__':
-    app.run(debug=True)

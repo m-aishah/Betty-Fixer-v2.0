@@ -31,38 +31,70 @@
     <!--Formatted code box with copy button-->
     <div class="positive-relation mb-4">
         <button class="btn btn-sm btn-outline-secondary copy-button" onclick="copyFormattedCode()">Copy</button>
-        <pre class="formatted-code">{{ formatted_code }}</pre></div>
+        <pre class="formatted-code">{{ formatted_code }}</pre>
     </div>
-      
-    <!--Back button.-->
-    <form method="POST">
-        <div class="text-center">
-        <a
-          href="/"
-          class="btn btn-primary btn-block custom-btn"
-          style="
-            font-family: Arial, sans-serif;
-            font-size: large;
-            background-color: #2db5d1;
-            border-color: #2db5d1;
-            border-radius: 25px;
-            width: 100%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            display: block; /* Make the button a block element */
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.3s ease,
-              width 0.3s ease;
-          "
-           onmouseover="this.style.backgroundColor='#37c3e8'; this.style.transform='scale(1.05)';"
-           onmouseout="this.style.backgroundColor='#2db5d1'; this.style.transform='scale(1)';"
-        >
-          Back
-        </a>
-      </div>
-    </form>
-   
+    
+    
+
   </div>
+
+  <!--Back and Save buttons-->
+  <div class="text-right mb-3">
+    <!-- Save button -->
+    <button 
+        type="button" 
+        class="btn btn-success mr-2"
+        data-toggle="modal"
+        data-target="#saveModal"
+    >
+        Save
+    </button>
+    <a
+        href="/fix_code"
+        class="btn btn-sm btn-outline-secondary"
+    >
+        Back
+    </a>
+</div>
+
+  <!-- Save modal -->
+  <div 
+    class="modal fade" 
+    id="saveModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="saveModalLabel" 
+    aria-hidden="true"
+    >
+      <div 
+        class="modal-dialog" 
+        role="document"
+       >
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="saveModalLabel">Save Code Snippet</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+
+              <form id="saveCodeForm" action="/save_code" method="POST">
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <label for="codeTitle">Title:</label>
+                          <input type="text" class="form-control" id="codeTitle" name="code_title" required>
+                      </div>
+                      <input type="hidden" name="code_content" value="{{ formatted_code }}">
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
 </div>
 
 <script>
