@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from .models import codeHistory
+from .import db
 import subprocess
 import glob
+
 '''Contains views definitions for the website.'''
 
 views = Blueprint('views', __name__)
@@ -27,7 +29,7 @@ def fix_code():
     '''
     code_id = request.args.get('code_id')
     code = codeHistory.query.get(code_id)
-    return render_template('fix_code.html' ,user=current_user)
+    return render_template('fix_code.html', user=current_user,code=code)
 
 
 @views.route('/dummy_user')
@@ -38,6 +40,17 @@ def dummy_user_home():
     Returns: the homepage.
     '''
     return render_template('home.html' ,user=None)
+
+@views.route('/save_code', methods=['POST'])
+@login_required
+def save_code():
+    if request.method == 'POST':
+        title = request.form.get('code_title')
+        content = request.form.get('code_content')
+        new_code = codeHistory(title=title, content=content, user_id=current_user.id)
+        db.session.add(new_code)
+        db.session.commit()
+        return redirect(url_for('views.home'))
 
 @views.route('/submit', methods=['POST'])
 def submit():
