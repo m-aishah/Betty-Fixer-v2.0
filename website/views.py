@@ -39,7 +39,7 @@ def dummy_user_home():
     
     Returns: the homepage.
     '''
-    return render_template('home.html' ,user=None)
+    return render_template('fix_code.html', user=None)
 
 @views.route('/save_code', methods=['POST'])
 @login_required

@@ -41,6 +41,7 @@
   <!--Back and Save buttons-->
   <div class="text-right mb-3">
     <!-- Save button -->
+    {%if user.is_authenticated%}
     <button 
         type="button" 
         class="btn btn-success mr-2"
@@ -49,6 +50,8 @@
     >
         Save
     </button>
+    {%endif%}
+    
     <a
         href="/fix_code"
         class="btn btn-sm btn-outline-secondary"
