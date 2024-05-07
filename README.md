@@ -58,13 +58,11 @@ For instance:
 <h2>  </h2>
 
 <h2> :fire: Future Updates </h2>
-This project is still in the early stages. Here is a list of expected upgrades in coming weeks
-
+We believe this project has prospects!. Here is a list of expected upgrades in coming weeks
 <br>
 <ul>
-<li> Apply parallel programming with Threads. </li>
-<li> Implement functionality to fix Betty Documentation errors.</li>
-<li> Work on more efficient way of setting up the Betty Fixer.</li>
+<li> Make Betty Fixer an extension in VsCode </li>
+<li> Integrate AI Chatbot to generate comments for C functions</li>
 </ul>
 
 <h2> :globe_with_meridians: Contributing </h2>
