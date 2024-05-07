@@ -17,7 +17,7 @@ As part of the requirements of graduating from the specialization stage of the A
 Betty Fixer is a command line/web application built to fix betty errors in a specified C file. It was built for the purpose of helping a programmer with betty errors so that the resources that would have gone into worrying about such errors can be employed in more important areas (like the actual logic of the code).
 
 <h2> :hammer: Setup & Usage </h2>
-
+<h3> Command Line Tool</h3>
 <h4> Dependencies</h4>
 <ul>
 <li> GCC - C compiler </li>
@@ -30,18 +30,18 @@ Betty Fixer is a command line/web application built to fix betty errors in a spe
 
 
 ``` bash
-git clone https://github.com/m-aishah/Betty-Fixer.git
+git clone https://github.com/m-aishah/Betty-Fixer-v2.0
 ```
 </li>
 
 <li> Next, navigate into the Betty fixer directory.
 
 ```bash
-cd Betty-Fixer
+cd Betty-Fixer-v2.0/coreFunctionality
 ```
 </li>
 
-<li> Using gcc, compile all the .c files in the Betty-Fixer directory.
+<li> Using gcc, compile all the .c files in the coreFunctionality directory.
 
 ```bash
 gcc -o bettyFixer *.c
